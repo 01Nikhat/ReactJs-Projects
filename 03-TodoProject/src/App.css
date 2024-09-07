@@ -1,0 +1,21 @@
+
+.header-todo{
+  font-weight: 700;
+  font-size: 45px;
+  margin: 10px;
+  margin-bottom: 20px;
+}
+.inputdata{
+  width:100%
+
+}
+.todo-container{
+  text-align: left;
+  
+}
+.kg-row{
+  margin: 8px 3px;
+}
+.kg-button{
+  min-width: 70px;
+}
