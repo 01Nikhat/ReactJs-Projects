@@ -7,7 +7,7 @@ import "./App.css";
 function App() {
   
 
-  return (<center classNameName = "container">
+  return (<center className = "container">
     < HeaderItem />
 
 
