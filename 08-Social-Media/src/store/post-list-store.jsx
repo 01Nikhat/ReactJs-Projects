@@ -5,19 +5,28 @@ import { createContext, useReducer } from "react";
 export const PostList = createContext({
   postList: [],
   addPost: () => {},
+  addAPIPost:  () => {},
   deletePost: () => {},
 });
 
 // Reducer for managing post list state
 const postlistReducer = (currentPostList, action) => {
-  switch (action.type) {
-    default:
-      return currentPostList;
+  let newPostList = currentPostList;
+  if (action.type === 'DELETE_POST') {
+      newPostList = currentPostList.filter((post) => post.id !== action.payload.postid);
   }
+  else if(action.type === 'ADD_POST'){
+    newPostList = [action.payload,...currentPostList];
+  }
+  else if(action.type === 'ADD_API_POST'){
+    
+    newPostList = action.payload.posts;
+}
+  return newPostList;
 };
 
 // Default initial post list
-const DEFAULT_POSTLIST = [
+/*const DEFAULT_POSTLIST = [
   {
     id: "1",
     title: "Going to Kolkata",
@@ -35,27 +44,56 @@ const DEFAULT_POSTLIST = [
     tags: ["studying", "kolkata", "degree", "Graduate"],
   },
 ];
-
+*/
 // PostListProvider component that wraps the application with context
 const PostListProvider = ({ children }) => {
-  const [postList, dispatchPostList] = useReducer(postlistReducer, DEFAULT_POSTLIST);
+  const [postList, dispatchPostList] = useReducer(postlistReducer, []);
 
-  const addPost = () => {};
+  const addPost = (userid,postTitle,postBody,reactions,tags) => {
+    dispatchPostList({
+      type:'ADD_POST',
+      payload:{
+        id: Date.now(),
+        title: postTitle,
+        body: postBody,
+        reactions: reactions,
+        userid: userid,
+        tags: tags,
+
+      }
+    })
+   // console.log(` ${userid} ${postTitle} ${postBody} ${reactions} ${tags}`);
+    
+  };
+
+  const addAPIPost = (posts) => {
+    dispatchPostList({
+      type:'ADD_API_POST',
+      payload:{
+        //we can write only posts value beacause both are same
+        posts
+      }
+    })
+    //console.log(` ${userid} ${postTitle} ${postBody} ${reactions} ${tags}`);
+    
+  };
+
   const deletePost = (postid) => {
     console.log(`delete post called for ${postid}`);
     dispatchPostList(
       {
-        type:"DELETE POST",
+        type:"DELETE_POST",
         payload:{
           postid
         }
       }
     )
     
+
   };
 
   return (
-    <PostList.Provider value={{ postList, addPost, deletePost }}>
+    <PostList.Provider value={{ postList, addAPIPost,addPost, deletePost }}>
       {children}
     </PostList.Provider>
   );
