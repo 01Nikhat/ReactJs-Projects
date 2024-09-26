@@ -1,0 +1,9 @@
+.Calculater{
+  border: 1px solid rgb(39, 36, 36);
+  width: 200px;
+  border-radius: 5px;
+  flex:1;
+  justify-content: center;
+  align-items: center;
+}
+
