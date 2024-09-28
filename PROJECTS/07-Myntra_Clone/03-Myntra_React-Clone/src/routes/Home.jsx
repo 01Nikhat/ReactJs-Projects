@@ -1,25 +1,15 @@
+import { useSelector } from "react-redux";
 import HomeItem from "../components/HomeItem";
 const Home = () =>{
 
-  const item = {
-    id: '003',
-    image: 'images/3.jpg',
-    company: 'NUEVOSDAMAS',
-    item_name: 'Women Red & White Printed A-Line Knee-Length Skirts',
-    original_price: 1599,
-    current_price: 495,
-    discount_percentage: 69,
-    return_period: 14,
-    delivery_date: '10 Oct 2023',
-    rating: {
-        stars: 4.1,
-        count: 249,
-      },
-   }
+  const items = useSelector(store =>store.items);
+  console.log(items);
+  
 
   return  <main>
   <div className="items-container">
-    <HomeItem item={item} />
+    {items.map(item =>  <HomeItem key={item.id} item={item} />)}
+   
   </div>
 </main>
 
