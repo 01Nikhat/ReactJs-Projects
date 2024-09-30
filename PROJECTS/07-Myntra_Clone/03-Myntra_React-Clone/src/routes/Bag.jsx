@@ -1,28 +1,23 @@
+import { useSelector } from "react-redux";
 import BagItem from "../components/BagItem";
 import BagSummary from "../components/BagSummary";
 
 const Bag = ( ) =>{
-  const item = {
-    id: '003',
-    image: 'images/3.jpg',
-    company: 'NUEVOSDAMAS',
-    item_name: 'Women Red & White Printed A-Line Knee-Length Skirts',
-    original_price: 1599,
-    current_price: 495,
-    discount_percentage: 69,
-    return_period: 14,
-    delivery_date: '10 Oct 2023',
-    rating: {
-        stars: 4.1,
-        count: 249,
-      },
-   }
+  const bagItems = useSelector(state =>state.bag);
+  const items = useSelector(state =>state.items);
+
+  const finalItems = items.filter(item =>{
+    const itemIndex = bagItems.indexOf(item.id);
+    return itemIndex >= 0;
+  });
+
   return (
    
    
     <main>
       <div className="bag-page">
-        <BagItem item = {item} />
+        {finalItems.map(item =><BagItem item = {item} />)}
+        
         <BagSummary />
         
 

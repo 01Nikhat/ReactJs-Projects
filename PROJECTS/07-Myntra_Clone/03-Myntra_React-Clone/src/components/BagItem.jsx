@@ -1,6 +1,14 @@
+import { useDispatch } from "react-redux";
+import { bagAction } from "../store/bagSlice";
+
 const BagItem = ({item})=>{
 
-  
+  const dispatch = useDispatch();
+
+  const handleRemoveItem = () =>{
+    dispatch(bagAction.removeFromBag(item.id));
+
+  }
 
   return (
     <div className="bag-items-container">
@@ -26,7 +34,7 @@ const BagItem = ({item})=>{
             </div>
         </div>
 
-        <div className="remove-from-cart" onclick={()=>console.log("Item Removed from card") }>X</div>
+        <div className="remove-from-cart" onClick={handleRemoveItem }>X</div>
       </div>
         
   </div>

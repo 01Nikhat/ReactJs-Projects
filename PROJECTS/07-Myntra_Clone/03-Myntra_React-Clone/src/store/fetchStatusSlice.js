@@ -7,15 +7,16 @@ const fetchStatusSlice = createSlice({
     currentlyFetching: false,
   },
   reducers : {
-    markFetchDone : (state) =>{
-      return state.fetchDone = true;
+    markFetchDone: (state) => {
+      state.fetchDone = true; // Directly mutate the state without returning
     },
-    markFetchingStarted : (state) =>{
-      return state.currentlyFetching = true;
+    markFetchingStarted: (state) => {
+      state.currentlyFetching = true;
     },
-    markFetchingFinished : (state) =>{
-      return state.currentlyFetching = false;
-    }
+    markFetchingFinished: (state) => {
+      state.currentlyFetching = false;
+    },
+    
   }
 });
 

@@ -3,7 +3,7 @@ import HomeItem from "../components/HomeItem";
 const Home = () =>{
 
   const items = useSelector(store =>store.items);
-  console.log(items);
+  //console.log("Got Items :",items);
   
 
   return  <main>

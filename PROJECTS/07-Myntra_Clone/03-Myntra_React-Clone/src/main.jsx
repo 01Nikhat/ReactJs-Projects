@@ -5,6 +5,8 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import App from '../src/routes/App.jsx';
 import Bag from '../src/routes/Bag.jsx'
 import './index.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+
 import Home from './routes/Home.jsx';
 import {Provider} from "react-redux";
 import Myntrastore from './store/index.js';

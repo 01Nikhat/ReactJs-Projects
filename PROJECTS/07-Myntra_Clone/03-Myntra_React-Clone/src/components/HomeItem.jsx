@@ -1,4 +1,23 @@
+import { useDispatch, useSelector } from "react-redux";
+import { bagAction } from "../store/bagSlice";
+import { TbShoppingBag } from "react-icons/tb";
+import { AiFillDelete } from "react-icons/ai";
+
 const HomeItem = ({item}) =>{
+  const dispatch  = useDispatch();
+ const bagItems =  useSelector(store =>store.bag);
+ const elementFound = bagItems.indexOf(item.id) >= 0;
+ console.log(item.id,elementFound);
+ 
+
+  const handleAddToBag = () =>{
+    dispatch(bagAction.addToBag(item.id));
+  }
+
+  const handleRemove = () =>{
+    dispatch(bagAction.removeFromBag(item.id));
+  }
+
   return <>
   <div className="item-container">
       <img className="item-image" src={item.image} alt="item image" />
@@ -12,8 +31,13 @@ const HomeItem = ({item}) =>{
           <span className="original-price">Rs {item.original_price}</span>
           <span className="discount">({item.discount_percentage}% OFF)</span>
       </div>
-      <button className="btn-add-bag" onClick={()=>console.log("Item was clicked")
-      }>Add to Bag</button>
+      
+      {elementFound ?(<button type="button" className="btn-add-bag btn btn-danger"  onClick={handleRemove} ><AiFillDelete /> Remove From Bag</button>)
+      : <button type="button" className="btn-add-bag btn btn-success" onClick={handleAddToBag}> <TbShoppingBag />    Add to Bag</button> 
+      
+       }
+      
+      
     </div>
   </>
 }
